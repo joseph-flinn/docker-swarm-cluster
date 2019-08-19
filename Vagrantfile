@@ -45,6 +45,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         v.memory = 2048
         v.cpus = 2
       end
+
+      if worker_id == WORKERS
+        # install ansible galaxy roles
+        worker.vm.provision "shell", type: "host_shell" do |sh|
+          sh.inline = "cd ansible && ansible-galaxy install -r requirements.yml -p roles --ignore-errors"
+        end
+      end
     end
   end
 end

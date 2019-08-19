@@ -24,8 +24,16 @@
   tags:
     - packages
 
+- shell: pip --version
+  register: pip_result
+
+- debug:
+    var: pip_result
+ 
+
 - name: install docker python dependencies
   pip: 
+    executable: /usr/bin/pip
     name: 
       - pyyaml
       - docker-py
