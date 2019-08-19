@@ -13,4 +13,4 @@
   + ...
 - `cd ansbile`
 - `ansible-playbook swarm.yml -i hosts`
-- check `192.168.50.101:9000` for a Docker UI
+- check `http://192.168.50.101:9000` for a Docker UI
