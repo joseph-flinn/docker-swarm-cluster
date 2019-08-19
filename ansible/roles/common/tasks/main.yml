@@ -1,25 +1,33 @@
 ---
 
-- name: Install epel
-  yum: name=epel-release state=latest
+# Derived from https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm
+
+- name: Update apt repo
+  become: yes
+  become_user: root
+  shell: >
+    apt update
 
 - name: Install required packages
-  yum: name={{ item }} state=latest
-  with_items:
-    - nc
-    - nmap
-    - htop
-    - sysstat
-    - python-pip
-    - bind-utils
-    - jq
+  apt: 
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - netcat
+      - nmap
+      - htop
+      - sysstat
+      - python-pip
+      - bind9
+      - jq
+      - curl
   tags:
     - packages
 
 - name: install docker python dependencies
-  pip: name={{ item.name }} version={{ item.version | default(omit) }}
-  with_items:
-    - { name: pyyaml }
-    - { name: docker-py, version: 1.9.0 }
+  pip: 
+    name: 
+      - pyyaml
+      - docker-py
   tags:
     - packages

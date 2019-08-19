@@ -1,18 +1,22 @@
 ---
 
+# Derived from https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm
+
 - hosts: managers[0]
   become: yes
   become_user: root
   tasks:
     - name: Get networks
       shell: >
-        docker network ls --filter name={{ item }}$ | tail -n +2
+        docker network ls --filter name={{ item }} | tail -n +2
       with_items:
         - appnet
       register: network_result
 
     - set_fact:
-        docker_current_networks: "{{ network_result.results | map(attribute='stdout') list | join(' ') }}"
+        docker_current_networks: "{{ network_result.results | map(attribute='stdout') | list | join(' ') }}"
+
+    - debug: var=docker_current_networks
 
     - name: Create overlay networks
       shell: >

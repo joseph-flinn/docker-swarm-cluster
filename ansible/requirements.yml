@@ -1,2 +1,5 @@
 ---
+
+# Derived from https://github.com/jamesdmorgan/vagrant-ansible-docker-swarm
+
 - name: alexinthesky.secure-docker-daemon

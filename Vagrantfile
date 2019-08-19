@@ -29,6 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       manager.vm.hostname = "manger#{manager_id}"
       manager.vm.network "private_network", ip: "192.168.50.#{100+manager_id}"
       manager.vm.provider "virtualbox" do |v|
+	v.gui = false
         v.memory = 2048
         v.cpus = 2
       end
@@ -40,23 +41,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       worker.vm.hostname = "worker#{worker_id}"
       worker.vm.network "private_network", ip: "192.168.50.#{110+worker_id}"
       worker.vm.provider "virtualbox" do |v|
+	v.gui = false
         v.memory = 2048
         v.cpus = 2
-      end
-
-      if worker_id == WORKERS
-        
-	# Install ansible galaxy roles
-	worker.vm.provision "shell", type: "host_shell" do |sh|
-	  sh.inline = "cd ansible && ansible-galaxy install -r requirements.yml -p roles --ignore-errors"
-        end
-
-        worker.vm.provision "swarm", type: "ansible" do |ansible|
-          ansible.limit = "all"
-          ansible.playbook = "ansible/swarm.yml"
-          ansible.verbose = "vv"
-          ansible.groups = ANSIBLE_GROUPS	
-	end 
       end
     end
   end

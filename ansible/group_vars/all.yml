@@ -1,0 +1,6 @@
+---
+
+vagrant_network_interface: eth1
+vagrant_primary_manager_ip: "{{ hostvars['manager1']['ansible_'+vagrant_network_interface].ipv4.address }}"
+
+swarm_bind_port: 2377
