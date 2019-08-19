@@ -1,11 +1,11 @@
-Prerequisites: 
+**Prerequisites:** 
 - Virtualbox
   + Signed kernel module if you are using Secure Boot in UEFI
 - Vagrant
 - Ansible
 
 
-To Run:
+**To Run:**
 - clone the repository
 - `vagrant up`
 - copy your ssh key to each machine
