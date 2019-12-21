@@ -1,11 +1,15 @@
-**Prerequisites:** 
+### Local VM Docker Swarm
+Using VirtualBox, Vagrant and Ansible, this project creates a local Docker Swarm
+for testing and development.
+
+#### Prerequisites:
 - Virtualbox
   + Signed kernel module if you are using Secure Boot in UEFI
 - Vagrant
 - Ansible
 
 
-**To Run:**
+#### To Run:
 - clone the repository
 - `vagrant up`
 - copy your ssh key to each machine
